@@ -1,0 +1,576 @@
+<!--
+Copyright (c) 2026 Francesca Cotugno
+All rights reserved. Unauthorized copying, modification, distribution, or
+publication of this file, via any medium, is prohibited without prior written
+permission.
+
+Third-party libraries loaded via CDN are governed by their respective licenses.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_1d423bee655ea6c27e9ab2e62f8c02d4 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; 
+            bottom: 20px; left: 20px; width: 220px; 
+            background: white; z-index: 9999; 
+            border:2px solid #444; border-radius:8px; padding:10px;">
+<b>Legenda — N° iscrizioni</b>
+<ul style="margin:0; padding-left:18px;">
+  <li style="color: darkred;">≥ 10</li>
+  <li style="color: red;">5–9</li>
+  <li style="color: orange;">3–4</li>
+  <li style="color: green;">2</li>
+  <li style="color: blue;">1</li>
+</ul>
+</div>
+    
+            <div class="folium-map" id="map_1d423bee655ea6c27e9ab2e62f8c02d4" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1d423bee655ea6c27e9ab2e62f8c02d4 = L.map(
+                "map_1d423bee655ea6c27e9ab2e62f8c02d4",
+                {
+                    center: [54.9, -2.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 7,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_21f2042054602ef8239b936a1b8279e1 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+            var circle_marker_31ad3dc21b60c8d9f37653980ad48f9b = L.circleMarker(
+                [54.974, -1.67],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.8, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_f2c525192c9c3bc6a8322b3e5e569416 = L.popup({"maxWidth": 450});
+
+        
+            var html_4e0bba1d0ea7d4405997be5a86343c19 = $(`<div id="html_4e0bba1d0ea7d4405997be5a86343c19" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Benwell – Condercum</b><br>       <b>N° iscrizioni:</b> 2<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1335: Deo Vetri sangto</li><li>RIB 1336: Vitir(i)bus</li></ul>     </div>     </div>`)[0];
+            popup_f2c525192c9c3bc6a8322b3e5e569416.setContent(html_4e0bba1d0ea7d4405997be5a86343c19);
+        
+
+        circle_marker_31ad3dc21b60c8d9f37653980ad48f9b.bindPopup(popup_f2c525192c9c3bc6a8322b3e5e569416)
+        ;
+
+        
+    
+    
+            circle_marker_31ad3dc21b60c8d9f37653980ad48f9b.bindTooltip(
+                `<div>
+                     Benwell – Condercum — N=2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_040f375c153a3c8d832e32f04c54186e = L.circleMarker(
+                [55.033, -2.223],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.8, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_f3dcf89b14169cef78880a4b3c50c841 = L.popup({"maxWidth": 450});
+
+        
+            var html_b03091c38f714144e0f4d853136e8a51 = $(`<div id="html_b03091c38f714144e0f4d853136e8a51" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Carrawburgh – Brocolitia</b><br>       <b>N° iscrizioni:</b> 2<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1548: Deo Veteri</li><li>RIB 1549: [Dibu]s Huiteribus</li></ul>     </div>     </div>`)[0];
+            popup_f3dcf89b14169cef78880a4b3c50c841.setContent(html_b03091c38f714144e0f4d853136e8a51);
+        
+
+        circle_marker_040f375c153a3c8d832e32f04c54186e.bindPopup(popup_f3dcf89b14169cef78880a4b3c50c841)
+        ;
+
+        
+    
+    
+            circle_marker_040f375c153a3c8d832e32f04c54186e.bindTooltip(
+                `<div>
+                     Carrawburgh – Brocolitia — N=2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f6f58dafbc476a98d83cababac314bb4 = L.circleMarker(
+                [54.985, -2.476],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.600000000000001, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_53b2f83f45845464c7b13cb4e320cb25 = L.popup({"maxWidth": 450});
+
+        
+            var html_99faacce39e83b49b4eca1b2b4a6eb37 = $(`<div id="html_99faacce39e83b49b4eca1b2b4a6eb37" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Carvoran – Magnis</b><br>       <b>N° iscrizioni:</b> 14<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1793: Deo Veteri</li><li>RIB 1794: Deo Veteri</li><li>RIB 1795: Deo sanct[o] Veteri</li><li>RIB 1796: Deo Vetiri sancto</li><li>RIB 1797: Deo Vetiri</li><li>RIB 1798: Deo Viteri</li><li>RIB 1799: Deo Vitiri</li><li>RIB 1800: Deo Vitiri</li><li>RIB 1801: Deo Vitiri</li><li>RIB 1802: Veteribus</li><li>RIB 1803: Dibus Veteribus</li><li>RIB 1804: Dibus Vitẹ[ribus]</li><li>RIB 1805: Dibus Vitiribus</li><li>RIB 2069: Huitiribus</li></ul>     </div>     </div>`)[0];
+            popup_53b2f83f45845464c7b13cb4e320cb25.setContent(html_99faacce39e83b49b4eca1b2b4a6eb37);
+        
+
+        circle_marker_f6f58dafbc476a98d83cababac314bb4.bindPopup(popup_53b2f83f45845464c7b13cb4e320cb25)
+        ;
+
+        
+    
+    
+            circle_marker_f6f58dafbc476a98d83cababac314bb4.bindTooltip(
+                `<div>
+                     Carvoran – Magnis — N=14
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e5e7464da604173c32d5155917ef6aa4 = L.circleMarker(
+                [54.376, -1.705],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.4, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_065194026e5b993a4464683b322e816e = L.popup({"maxWidth": 450});
+
+        
+            var html_8ec2634fc8e881084448bc8442ecf6a3 = $(`<div id="html_8ec2634fc8e881084448bc8442ecf6a3" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Catterick – Caractonium</b><br>       <b>N° iscrizioni:</b> 1<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 727: Deo Sancto Vheteri</li></ul>     </div>     </div>`)[0];
+            popup_065194026e5b993a4464683b322e816e.setContent(html_8ec2634fc8e881084448bc8442ecf6a3);
+        
+
+        circle_marker_e5e7464da604173c32d5155917ef6aa4.bindPopup(popup_065194026e5b993a4464683b322e816e)
+        ;
+
+        
+    
+    
+            circle_marker_e5e7464da604173c32d5155917ef6aa4.bindTooltip(
+                `<div>
+                     Catterick – Caractonium — N=1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_add2bdc09be7b5aa3b4f91fa1d49c0d2 = L.circleMarker(
+                [54.992, -2.36],
+                {"bubblingMouseEvents": true, "color": "darkred", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.2, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_5367ca499914f4c848b7ea08b5fcf7f1 = L.popup({"maxWidth": 450});
+
+        
+            var html_fb5adaf2f6c0dc291db3e64530048c2d = $(`<div id="html_fb5adaf2f6c0dc291db3e64530048c2d" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Chesterholm – Vindolanda</b><br>       <b>N° iscrizioni:</b> 13<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1697: Deo [V]ete[r]i</li><li>RIB 1698: Veteri</li><li>RIB 1699: Veteribus</li><li>RIB 3335: Deo Huitiri</li><li>RIB 3336: Deo Huitr(…)</li><li>RIB 3337: Deo Vetiri</li><li>RIB 3338: Dibus Veteribus</li><li>RIB 3339: Veteribus</li><li>RIB 3340: Deo Vi(…)</li><li>RIB 3341: Ara Vitirum</li><li>RIB 3342: Dibus Vitiri(b)us</li><li>RIB 3343: Deo V(…)</li><li>Britannia 41, p. 447: Deo Hueteribus</li></ul>     </div>     </div>`)[0];
+            popup_5367ca499914f4c848b7ea08b5fcf7f1.setContent(html_fb5adaf2f6c0dc291db3e64530048c2d);
+        
+
+        circle_marker_add2bdc09be7b5aa3b4f91fa1d49c0d2.bindPopup(popup_5367ca499914f4c848b7ea08b5fcf7f1)
+        ;
+
+        
+    
+    
+            circle_marker_add2bdc09be7b5aa3b4f91fa1d49c0d2.bindTooltip(
+                `<div>
+                     Chesterholm – Vindolanda — N=13
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_24a747f95b994a656f8bfe5129baf60e = L.circleMarker(
+                [54.858, -1.575],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.2, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_9c3c5a3206f4b7aaf1f1540b6a79fcde = L.popup({"maxWidth": 450});
+
+        
+            var html_07191ceb2a1af204812719b51bbc898e = $(`<div id="html_07191ceb2a1af204812719b51bbc898e" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Chester-le-Street – Concangis</b><br>       <b>N° iscrizioni:</b> 3<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1046: Deo Vitiri</li><li>RIB 1047: Deabus Vitiribus</li><li>RIB 1048: Deabus Vit(iri)bus</li></ul>     </div>     </div>`)[0];
+            popup_9c3c5a3206f4b7aaf1f1540b6a79fcde.setContent(html_07191ceb2a1af204812719b51bbc898e);
+        
+
+        circle_marker_24a747f95b994a656f8bfe5129baf60e.bindPopup(popup_9c3c5a3206f4b7aaf1f1540b6a79fcde)
+        ;
+
+        
+    
+    
+            circle_marker_24a747f95b994a656f8bfe5129baf60e.bindTooltip(
+                `<div>
+                     Chester-le-Street – Concangis — N=3
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7eb38afdbcb36415cf0d330ddf5b2cc9 = L.circleMarker(
+                [55.021, -2.127],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.6, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_1e5b431826829a923b123bc3d43fbbae = L.popup({"maxWidth": 450});
+
+        
+            var html_f422f062c656114ee022f543896077cd = $(`<div id="html_f422f062c656114ee022f543896077cd" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Chesters – Cilurnum</b><br>       <b>N° iscrizioni:</b> 4<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1455: Deo Sancto Vitiri</li><li>RIB 1456: Dibus Veteribus</li><li>RIB 1457: Dibus Vitirbus</li><li>RIB 1458: D(eo) Votri(?)</li></ul>     </div>     </div>`)[0];
+            popup_1e5b431826829a923b123bc3d43fbbae.setContent(html_f422f062c656114ee022f543896077cd);
+        
+
+        circle_marker_7eb38afdbcb36415cf0d330ddf5b2cc9.bindPopup(popup_1e5b431826829a923b123bc3d43fbbae)
+        ;
+
+        
+    
+    
+            circle_marker_7eb38afdbcb36415cf0d330ddf5b2cc9.bindTooltip(
+                `<div>
+                     Chesters – Cilurnum — N=4
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_df1bb0c75b604d4e69c65f29cc6771f8 = L.circleMarker(
+                [54.973, -2.017],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.2, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_7e129a6c29ab8c16b41654b9c275f956 = L.popup({"maxWidth": 450});
+
+        
+            var html_246136171dc2a80f5031b0937e34e453 = $(`<div id="html_246136171dc2a80f5031b0937e34e453" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Corbridge – Coria</b><br>       <b>N° iscrizioni:</b> 3<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1139: Deo Veteri</li><li>RIB 1140: Deo Vitiri</li><li>RIB 1141: Vit(…)</li></ul>     </div>     </div>`)[0];
+            popup_7e129a6c29ab8c16b41654b9c275f956.setContent(html_246136171dc2a80f5031b0937e34e453);
+        
+
+        circle_marker_df1bb0c75b604d4e69c65f29cc6771f8.bindPopup(popup_7e129a6c29ab8c16b41654b9c275f956)
+        ;
+
+        
+    
+    
+            circle_marker_df1bb0c75b604d4e69c65f29cc6771f8.bindTooltip(
+                `<div>
+                     Corbridge – Coria — N=3
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_0070641060e87ee3afd8ab52848e9594 = L.circleMarker(
+                [54.885, -1.862],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.8, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_3924098ab3963cb587088e3194b1a035 = L.popup({"maxWidth": 450});
+
+        
+            var html_8f5f0bee633ebafe8e541b51ea734013 = $(`<div id="html_8f5f0bee633ebafe8e541b51ea734013" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Ebchester – Vindomora</b><br>       <b>N° iscrizioni:</b> 2<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1103: Deo Vitiri Maximus</li><li>RIB 1104: Deo Vitiri</li></ul>     </div>     </div>`)[0];
+            popup_3924098ab3963cb587088e3194b1a035.setContent(html_8f5f0bee633ebafe8e541b51ea734013);
+        
+
+        circle_marker_0070641060e87ee3afd8ab52848e9594.bindPopup(popup_3924098ab3963cb587088e3194b1a035)
+        ;
+
+        
+    
+    
+            circle_marker_0070641060e87ee3afd8ab52848e9594.bindTooltip(
+                `<div>
+                     Ebchester – Vindomora — N=2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b3a5c71c67f2ba5b268cb18a0416322f = L.circleMarker(
+                [54.988, -2.452],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.2, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_be487f768f693baf3692ec117fab043c = L.popup({"maxWidth": 450});
+
+        
+            var html_0bde3a0e41bad3061c5db4ecd965f412 = $(`<div id="html_0bde3a0e41bad3061c5db4ecd965f412" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Great Chesters – Aesica</b><br>       <b>N° iscrizioni:</b> 3<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1728: Deo Vetiri</li><li>RIB 1729: Dib[us] Veteribus</li><li>RIB 1730: Dibus Veteribus</li></ul>     </div>     </div>`)[0];
+            popup_be487f768f693baf3692ec117fab043c.setContent(html_0bde3a0e41bad3061c5db4ecd965f412);
+        
+
+        circle_marker_b3a5c71c67f2ba5b268cb18a0416322f.bindPopup(popup_be487f768f693baf3692ec117fab043c)
+        ;
+
+        
+    
+    
+            circle_marker_b3a5c71c67f2ba5b268cb18a0416322f.bindTooltip(
+                `<div>
+                     Great Chesters – Aesica — N=3
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4e14cfd1e62bb596964d085a6897b195 = L.circleMarker(
+                [55.013, -2.331],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_ff11075fae7299b53717f13615e566f6 = L.popup({"maxWidth": 450});
+
+        
+            var html_bb5041fd9d4f08c89de9db5ccd9f4049 = $(`<div id="html_bb5041fd9d4f08c89de9db5ccd9f4049" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Housesteads – Vercovicium</b><br>       <b>N° iscrizioni:</b> 7<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1602: Deo Hueteri</li><li>RIB 1603: Deo Huitri</li><li>RIB 1604: Deo Veteribus</li><li>[RIB] 1605: [Dib]us Vete[ri]bus</li><li>RIB 1606: Veteribus</li><li>RIB 1607: Dibus V[eteribus]</li><li>RIB 2068: Deo Veteri</li></ul>     </div>     </div>`)[0];
+            popup_ff11075fae7299b53717f13615e566f6.setContent(html_bb5041fd9d4f08c89de9db5ccd9f4049);
+        
+
+        circle_marker_4e14cfd1e62bb596964d085a6897b195.bindPopup(popup_ff11075fae7299b53717f13615e566f6)
+        ;
+
+        
+    
+    
+            circle_marker_4e14cfd1e62bb596964d085a6897b195.bindTooltip(
+                `<div>
+                     Housesteads – Vercovicium — N=7
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a44b5ec4aed586c152e48eeb931d4979 = L.circleMarker(
+                [54.822, -1.744],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.8, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_4fd7ca781172d1d6cde5034418b1425a = L.popup({"maxWidth": 450});
+
+        
+            var html_af74811fb35094912cb1d4fe299ffc4c = $(`<div id="html_af74811fb35094912cb1d4fe299ffc4c" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Lanchester – Longovicium</b><br>       <b>N° iscrizioni:</b> 2<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 1087: Deo Vit(iri)</li><li>RIB 1088: Vitir[i]</li></ul>     </div>     </div>`)[0];
+            popup_4fd7ca781172d1d6cde5034418b1425a.setContent(html_af74811fb35094912cb1d4fe299ffc4c);
+        
+
+        circle_marker_a44b5ec4aed586c152e48eeb931d4979.bindPopup(popup_4fd7ca781172d1d6cde5034418b1425a)
+        ;
+
+        
+    
+    
+            circle_marker_a44b5ec4aed586c152e48eeb931d4979.bindTooltip(
+                `<div>
+                     Lanchester – Longovicium — N=2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_179ce8833cf317a8046dc4b7033f0f40 = L.circleMarker(
+                [55.008, -2.989],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.8, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_5f9f5cf7418acb89ad2b0ecc778b17a7 = L.popup({"maxWidth": 450});
+
+        
+            var html_b081c75daaa9128ec98b40c4acd97edd = $(`<div id="html_b081c75daaa9128ec98b40c4acd97edd" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Netherby – Castra Exploratorum</b><br>       <b>N° iscrizioni:</b> 2<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 971: Mogonti Vitire</li><li>RIB 973: Deo Huetiri</li></ul>     </div>     </div>`)[0];
+            popup_5f9f5cf7418acb89ad2b0ecc778b17a7.setContent(html_b081c75daaa9128ec98b40c4acd97edd);
+        
+
+        circle_marker_179ce8833cf317a8046dc4b7033f0f40.bindPopup(popup_5f9f5cf7418acb89ad2b0ecc778b17a7)
+        ;
+
+        
+    
+    
+            circle_marker_179ce8833cf317a8046dc4b7033f0f40.bindTooltip(
+                `<div>
+                     Netherby – Castra Exploratorum — N=2
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e5bea047dbf88c32e3c4c022008977a9 = L.circleMarker(
+                [54.75, -2.73],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.4, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_3362ec940471c7443ed9253a48c1f652 = L.popup({"maxWidth": 450});
+
+        
+            var html_8bea824e9d5fa250ce5c0b9dc5b5a11b = $(`<div id="html_8bea824e9d5fa250ce5c0b9dc5b5a11b" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Old Penrith – Voreda</b><br>       <b>N° iscrizioni:</b> 1<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 925: Vicri[b]us</li></ul>     </div>     </div>`)[0];
+            popup_3362ec940471c7443ed9253a48c1f652.setContent(html_8bea824e9d5fa250ce5c0b9dc5b5a11b);
+        
+
+        circle_marker_e5bea047dbf88c32e3c4c022008977a9.bindPopup(popup_3362ec940471c7443ed9253a48c1f652)
+        ;
+
+        
+    
+    
+            circle_marker_e5bea047dbf88c32e3c4c022008977a9.bindTooltip(
+                `<div>
+                     Old Penrith – Voreda — N=1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_9caf21fbcd2969e1e5fa64745e859f87 = L.circleMarker(
+                [54.545, -1.671],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.4, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_9fd57b5c8f04aff1d37596d2a1ebcaa0 = L.popup({"maxWidth": 450});
+
+        
+            var html_1e500fc35d579f9867efe203044a103c = $(`<div id="html_1e500fc35d579f9867efe203044a103c" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Piercebridge – Morbium/Vinovium</b><br>       <b>N° iscrizioni:</b> 1<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 3254: DIIo VIIteri</li></ul>     </div>     </div>`)[0];
+            popup_9fd57b5c8f04aff1d37596d2a1ebcaa0.setContent(html_1e500fc35d579f9867efe203044a103c);
+        
+
+        circle_marker_9caf21fbcd2969e1e5fa64745e859f87.bindPopup(popup_9fd57b5c8f04aff1d37596d2a1ebcaa0)
+        ;
+
+        
+    
+    
+            circle_marker_9caf21fbcd2969e1e5fa64745e859f87.bindTooltip(
+                `<div>
+                     Piercebridge – Morbium/Vinovium — N=1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_29a79721830b247d4fb2852254e9c41d = L.circleMarker(
+                [52.68, -0.722],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.4, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_671438d0b6a050e0404a9ba0bf9f49ca = L.popup({"maxWidth": 450});
+
+        
+            var html_727a5496cb0d157c865e7bc5c08bf65b = $(`<div id="html_727a5496cb0d157c865e7bc5c08bf65b" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>Thistleton</b><br>       <b>N° iscrizioni:</b> 1<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 2431.3: Veteri</li></ul>     </div>     </div>`)[0];
+            popup_671438d0b6a050e0404a9ba0bf9f49ca.setContent(html_727a5496cb0d157c865e7bc5c08bf65b);
+        
+
+        circle_marker_29a79721830b247d4fb2852254e9c41d.bindPopup(popup_671438d0b6a050e0404a9ba0bf9f49ca)
+        ;
+
+        
+    
+    
+            circle_marker_29a79721830b247d4fb2852254e9c41d.bindTooltip(
+                `<div>
+                     Thistleton — N=1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_db49d827fc08107071221ea9823a6612 = L.circleMarker(
+                [54.999, -1.421],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.4, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_33268ef2925d603ae61051dc1e0eda32 = L.popup({"maxWidth": 450});
+
+        
+            var html_a4144dfd63f9da8a198621ce5530b1fd = $(`<div id="html_a4144dfd63f9da8a198621ce5530b1fd" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>South Shields – Arbeia</b><br>       <b>N° iscrizioni:</b> 1<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 3268: Ansu Vitiri</li></ul>     </div>     </div>`)[0];
+            popup_33268ef2925d603ae61051dc1e0eda32.setContent(html_a4144dfd63f9da8a198621ce5530b1fd);
+        
+
+        circle_marker_db49d827fc08107071221ea9823a6612.bindPopup(popup_33268ef2925d603ae61051dc1e0eda32)
+        ;
+
+        
+    
+    
+            circle_marker_db49d827fc08107071221ea9823a6612.bindTooltip(
+                `<div>
+                     South Shields – Arbeia — N=1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_aef9cde50818b16c6e8a8381be5ed0e9 = L.circleMarker(
+                [53.959, -1.082],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.4, "stroke": true, "weight": 3}
+            ).addTo(map_1d423bee655ea6c27e9ab2e62f8c02d4);
+        
+    
+        var popup_7c12de2c1f3572922d6d73c19ff8a3fd = L.popup({"maxWidth": 450});
+
+        
+            var html_dc3b15fc8fe475c27ff0505dba014cf7 = $(`<div id="html_dc3b15fc8fe475c27ff0505dba014cf7" style="width: 100.0%; height: 100.0%;">     <div style='font-size:14px'>       <b>York – Eboracum</b><br>       <b>N° iscrizioni:</b> 1<br><br>       <b>RIB / Letture:</b>       <ul><li>RIB 660: Deo Veteri</li></ul>     </div>     </div>`)[0];
+            popup_7c12de2c1f3572922d6d73c19ff8a3fd.setContent(html_dc3b15fc8fe475c27ff0505dba014cf7);
+        
+
+        circle_marker_aef9cde50818b16c6e8a8381be5ed0e9.bindPopup(popup_7c12de2c1f3572922d6d73c19ff8a3fd)
+        ;
+
+        
+    
+    
+            circle_marker_aef9cde50818b16c6e8a8381be5ed0e9.bindTooltip(
+                `<div>
+                     York – Eboracum — N=1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>
