@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <!--
-Copyright (c) 2026 Francesca Cotugno
-All rights reserved. Unauthorized copying, modification, distribution, or
-publication of this file, via any medium, is prohibited without prior written
-permission.
+  Epigraphic corpus FRAG · Veteris / Vitiris
+  The many spellings of Veteris and Vitiris — votive dedications in Roman Britain
+  Interactive epigraphic map — FRAG – Fractured Roots project (PRJ-2171)
+  Università degli Studi di Palermo, Dipartimento di Scienze Umanistiche
 
-Third-party libraries loaded via CDN are governed by their respective licenses.
+  RIGHTS STATEMENT
+
+  © 2026 Francesca Cotugno — for the following components only:
+  the selection of the dedications, the classification of the graphemic
+  variants of the theonym, the geographical mapping and commentary, the
+  visual design and the source code of this page. Reproduction,
+  modification or redistribution of these components requires the
+  author's prior written permission.
+
+  The Latin texts of the inscriptions, their readings, restorations,
+  find-spot data and reference numbers are NOT the author's work and
+  are NOT claimed by her. They are reproduced, for scholarly purposes
+  and with attribution, from The Roman Inscriptions of Britain, whose
+  rights remain entirely with its editors, publishers and institutions:
+
+    - R.G. Collingwood, R.P. Wright, The Roman Inscriptions of Britain,
+      I: Inscriptions on Stone, Oxford 1965; rev. ed. with Addenda and
+      Corrigenda by R.S.O. Tomlin, Stroud 1995.
+    - R.S.O. Tomlin, R.P. Wright, M.W.C. Hassall, The Roman Inscriptions
+      of Britain, III: Inscriptions on Stone found or notified between
+      1 January 1955 and 31 December 2006, Oxford 2009.
+    - Roman Inscriptions of Britain Online, ed. S. Vanderbilt (LatinNow),
+      https://romaninscriptionsofbritain.org — CC BY 4.0.
+
+  Each record cites its RIB number. Users who wish to reuse the
+  inscription texts must refer to, and comply with, the terms of use
+  of RIB Online (CC BY 4.0: attribution required).
+
+  Base maps: © OpenStreetMap contributors (ODbL), © OpenTopoMap (CC BY-SA),
+  Tiles © Esri, HERE, Garmin. Libraries: Leaflet and Leaflet.markercluster
+  (BSD-2-Clause), loaded from CDN. Fonts: Cormorant Garamond, Inter (SIL OFL).
 -->
 <html lang="en">
 <head>
@@ -26,6 +56,8 @@ Third-party libraries loaded via CDN are governed by their respective licenses.
     --gold:#c9a35a; --gold2:#8f7137;
     --c-v:#3f8c85; --c-vh:#c9a35a; --c-h:#b5533c;
     --c-sg:#5b7fa6; --c-pl:#a7783c; --c-un:#8a8580;
+    --c-ee:#3f8c85; --c-ei:#7fb2a6; --c-ii:#b5533c; --c-ie:#d98c6a; --c-oth:#c9a35a;
+    --c-m:#5b7fa6; --c-f:#b04a7a;
     --sidebar:520px;
   }
   *{box-sizing:border-box}
@@ -66,7 +98,7 @@ Third-party libraries loaded via CDN are governed by their respective licenses.
   .label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin:18px 0 8px}
   .label:first-child{margin-top:0}
   .seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-  .seg button{flex:1;background:none;border:0;padding:11px;cursor:pointer;color:var(--ink2)}
+  .seg button{flex:1;background:none;border:0;padding:11px 6px;cursor:pointer;color:var(--ink2);font-size:12px}
   .seg button.on{background:var(--gold);color:#1f1c19;font-weight:600}
   .chips{display:flex;gap:8px;flex-wrap:wrap}
   .chip{
@@ -108,6 +140,13 @@ Third-party libraries loaded via CDN are governed by their respective licenses.
   .insc .txt{font:500 19px/1.2 "Cormorant Garamond",serif}
   .insc .site{color:var(--ink2);font-size:12px}
   .foot{padding:14px 28px;color:var(--ink2);font-size:12px;border-top:1px solid var(--line);margin-top:auto}
+  .foot details.rights{margin-top:8px}
+  .foot details.rights summary{cursor:pointer;letter-spacing:.08em;text-transform:uppercase;font-size:10px;font-weight:600;list-style:none;color:var(--ink)}
+  .foot details.rights summary::-webkit-details-marker{display:none}
+  .foot details.rights summary::before{content:"▸ "}
+  .foot details.rights[open] summary::before{content:"▾ "}
+  .foot details.rights p{margin:7px 0 0;line-height:1.5;font-size:11px}
+  .foot details.rights a{color:inherit}
   .foot em{color:var(--ink)}
 
   /* Map overlays */
@@ -179,7 +218,7 @@ Third-party libraries loaded via CDN are governed by their respective licenses.
     <div class="eyebrow">Epigraphic corpus FRAG – Fractured Roots</div>
     <h1>The many spellings of <em>Veteris</em> and <em>Vitiris</em></h1>
     <p class="lead">Votive dedications to the god (or gods) Veteris in Roman Britain, concentrated along
-      Hadrian's Wall. Compare the graphemic variants of the theonym and read the text of each inscription.</p>
+      Hadrian's Wall. Colour the points by initial spelling, stem vowels (<em>Veter-</em> / <em>Vitir-</em>), number or gender of the votive formula, and read the text of each inscription.</p>
     <div class="stats" id="stats"></div>
   </div>
 
@@ -188,6 +227,8 @@ Third-party libraries loaded via CDN are governed by their respective licenses.
     <div class="seg" id="modeSeg">
       <button type="button" data-mode="init" class="on">Initial spelling</button>
       <button type="button" data-mode="num">Number</button>
+      <button type="button" data-mode="vow">Vowels</button>
+      <button type="button" data-mode="gen">Gender</button>
     </div>
     <div class="label" id="catLabel">Initial spelling</div>
     <div class="chips" id="chips"></div>
@@ -209,7 +250,14 @@ Third-party libraries loaded via CDN are governed by their respective licenses.
     <p class="count"><b id="nRes2">0</b> dedications</p>
     <div id="inscList"></div>
   </div>
-  <div class="foot">Compiled within the <em>FRAG – Fractured Roots</em> research project. Readings follow RIB.</div>
+  <div class="foot">Compiled within the <em>FRAG – Fractured Roots</em> research project (PRJ-2171). Readings follow RIB.
+    <details class="rights">
+      <summary>Sources &amp; rights</summary>
+      <p><b>What is the author's:</b> the selection of the dedications, the classification of the graphemic variants of the theonym, the mapping, the commentary, the design and the code of this page — © 2026 Francesca Cotugno, Università degli Studi di Palermo. All rights reserved for these components.</p>
+      <p><b>What is not:</b> the Latin texts of the inscriptions, their readings and restorations, the find-spot data and the RIB numbers are reproduced for scholarly purposes, with attribution, from <em>The Roman Inscriptions of Britain</em>: R.G. Collingwood &amp; R.P. Wright, RIB I (Oxford 1965; rev. R.S.O. Tomlin 1995); R.S.O. Tomlin, R.P. Wright &amp; M.W.C. Hassall, RIB III (Oxford 2009); and <a href="https://romaninscriptionsofbritain.org" target="_blank" rel="noopener">RIB Online</a>, ed. S. Vanderbilt (LatinNow), CC BY 4.0. The author claims no rights whatsoever over this material, which remains the property of its editors and publishers. Any reuse of the texts must comply with the terms of RIB Online (attribution required).</p>
+      <p><b>Base maps:</b> © OpenStreetMap contributors; © OpenTopoMap (CC BY-SA); Tiles © Esri, HERE, Garmin. Leaflet (BSD).</p>
+    </details>
+  </div>
 </aside>
 
 <div id="map"></div>
@@ -254,76 +302,78 @@ var SITES = {
   york:{name:"York – Eboracum",lat:53.959,lon:-1.082}
 };
 
-/* init: V | VH | H   ·   num: sg | pl | un (not determinable) */
+/* init: V | VH | H   ·   num: sg | pl | un   ·   vow (stem vowels): ee Veter- | ii Vitir- | ei Vetir- | ie Viter- | oth | un   ·   gen: m | f | un (no deus/dea) */
 var INSC = [
- ["benwell","RIB 1335","Deo Vetri sangto","V","sg"],
- ["benwell","RIB 1336","Vitir(i)bus","V","pl"],
- ["carrawburgh","RIB 1548","Deo Veteri","V","sg"],
- ["carrawburgh","RIB 1549","[Dibu]s Huiteribus","H","pl"],
- ["carvoran","RIB 1793","Deo Veteri","V","sg"],
- ["carvoran","RIB 1794","Deo Veteri","V","sg"],
- ["carvoran","RIB 1795","Deo sanct[o] Veteri","V","sg"],
- ["carvoran","RIB 1796","Deo Vetiri sancto","V","sg"],
- ["carvoran","RIB 1797","Deo Vetiri","V","sg"],
- ["carvoran","RIB 1798","Deo Viteri","V","sg"],
- ["carvoran","RIB 1799","Deo Vitiri","V","sg"],
- ["carvoran","RIB 1800","Deo Vitiri","V","sg"],
- ["carvoran","RIB 1801","Deo Vitiri","V","sg"],
- ["carvoran","RIB 1802","Veteribus","V","pl"],
- ["carvoran","RIB 1803","Dibus Veteribus","V","pl"],
- ["carvoran","RIB 1804","Dibus Vitẹ[ribus]","V","pl"],
- ["carvoran","RIB 1805","Dibus Vitiribus","V","pl"],
- ["carvoran","RIB 2069","Huitiribus","H","pl"],
- ["catterick","RIB 727","Deo Sancto Vheteri","VH","sg"],
- ["vindolanda","RIB 1697","Deo [V]ete[r]i","V","sg"],
- ["vindolanda","RIB 1698","Veteri","V","sg"],
- ["vindolanda","RIB 1699","Veteribus","V","pl"],
- ["vindolanda","RIB 3335","Deo Huitiri","H","sg"],
- ["vindolanda","RIB 3336","Deo Huitr(…)","H","un"],
- ["vindolanda","RIB 3337","Deo Vetiri","V","sg"],
- ["vindolanda","RIB 3338","Dibus Veteribus","V","pl"],
- ["vindolanda","RIB 3339","Veteribus","V","pl"],
- ["vindolanda","RIB 3340","Deo Vi(…)","V","un"],
- ["vindolanda","RIB 3341","Ara Vitirum","V","pl"],
- ["vindolanda","RIB 3342","Dibus Vitiri(b)us","V","pl"],
- ["vindolanda","RIB 3343","Deo V(…)","V","un"],
- ["vindolanda","Britannia 41, p. 447","Deo Hueteribus","H","pl"],
- ["chesterlestreet","RIB 1046","Deo Vitiri","V","sg"],
- ["chesterlestreet","RIB 1047","Deabus Vitiribus","V","pl"],
- ["chesterlestreet","RIB 1048","Deabus Vit(iri)bus","V","pl"],
- ["chesters","RIB 1455","Deo Sancto Vitiri","V","sg"],
- ["chesters","RIB 1456","Dibus Veteribus","V","pl"],
- ["chesters","RIB 1457","Dibus Vitirbus","V","pl"],
- ["chesters","RIB 1458","D(eo) Votri(?)","V","sg"],
- ["corbridge","RIB 1139","Deo Veteri","V","sg"],
- ["corbridge","RIB 1140","Deo Vitiri","V","sg"],
- ["corbridge","RIB 1141","Vit(…)","V","un"],
- ["ebchester","RIB 1103","Deo Vitiri Maximus","V","sg"],
- ["ebchester","RIB 1104","Deo Vitiri","V","sg"],
- ["greatchesters","RIB 1728","Deo Vetiri","V","sg"],
- ["greatchesters","RIB 1729","Dib[us] Veteribus","V","pl"],
- ["greatchesters","RIB 1730","Dibus Veteribus","V","pl"],
- ["housesteads","RIB 1602","Deo Hueteri","H","sg"],
- ["housesteads","RIB 1603","Deo Huitri","H","sg"],
- ["housesteads","RIB 1604","Deo Veteribus","V","pl"],
- ["housesteads","RIB 1605","[Dib]us Vete[ri]bus","V","pl"],
- ["housesteads","RIB 1606","Veteribus","V","pl"],
- ["housesteads","RIB 1607","Dibus V[eteribus]","V","pl"],
- ["housesteads","RIB 2068","Deo Veteri","V","sg"],
- ["lanchester","RIB 1087","Deo Vit(iri)","V","sg"],
- ["lanchester","RIB 1088","Vitir[i]","V","sg"],
- ["netherby","RIB 971","Mogonti Vitire","V","sg"],
- ["netherby","RIB 973","Deo Huetiri","H","sg"],
- ["oldpenrith","RIB 925","Vicri[b]us","V","pl"],
- ["piercebridge","RIB 3254","DIIo VIIteri","V","sg"],
- ["thistleton","RIB 2431.3","Veteri","V","sg"],
- ["southshields","RIB 3268","Ansu Vitiri","V","sg"],
- ["york","RIB 660","Deo Veteri","V","sg"]
-].map(function(r,i){return {id:i,site:r[0],rib:r[1],text:r[2],init:r[3],num:r[4]};});
+ ["benwell","RIB 1335","Deo Vetri sangto","V","sg","oth","m"],
+ ["benwell","RIB 1336","Vitir(i)bus","V","pl","ii","un"],
+ ["carrawburgh","RIB 1548","Deo Veteri","V","sg","ee","m"],
+ ["carrawburgh","RIB 1549","[Dibu]s Huiteribus","H","pl","ie","m"],
+ ["carvoran","RIB 1793","Deo Veteri","V","sg","ee","m"],
+ ["carvoran","RIB 1794","Deo Veteri","V","sg","ee","m"],
+ ["carvoran","RIB 1795","Deo sanct[o] Veteri","V","sg","ee","m"],
+ ["carvoran","RIB 1796","Deo Vetiri sancto","V","sg","ei","m"],
+ ["carvoran","RIB 1797","Deo Vetiri","V","sg","ei","m"],
+ ["carvoran","RIB 1798","Deo Viteri","V","sg","ie","m"],
+ ["carvoran","RIB 1799","Deo Vitiri","V","sg","ii","m"],
+ ["carvoran","RIB 1800","Deo Vitiri","V","sg","ii","m"],
+ ["carvoran","RIB 1801","Deo Vitiri","V","sg","ii","m"],
+ ["carvoran","RIB 1802","Veteribus","V","pl","ee","un"],
+ ["carvoran","RIB 1803","Dibus Veteribus","V","pl","ee","m"],
+ ["carvoran","RIB 1804","Dibus Vitẹ[ribus]","V","pl","ie","m"],
+ ["carvoran","RIB 1805","Dibus Vitiribus","V","pl","ii","m"],
+ ["carvoran","RIB 2069","Huitiribus","H","pl","ii","un"],
+ ["catterick","RIB 727","Deo Sancto Vheteri","VH","sg","ee","m"],
+ ["vindolanda","RIB 1697","Deo [V]ete[r]i","V","sg","ee","m"],
+ ["vindolanda","RIB 1698","Veteri","V","sg","ee","un"],
+ ["vindolanda","RIB 1699","Veteribus","V","pl","ee","un"],
+ ["vindolanda","RIB 3335","Deo Huitiri","H","sg","ii","m"],
+ ["vindolanda","RIB 3336","Deo Huitr(…)","H","un","un","m"],
+ ["vindolanda","RIB 3337","Deo Vetiri","V","sg","ei","m"],
+ ["vindolanda","RIB 3338","Dibus Veteribus","V","pl","ee","m"],
+ ["vindolanda","RIB 3339","Veteribus","V","pl","ee","un"],
+ ["vindolanda","RIB 3340","Deo Vi(…)","V","un","un","m"],
+ ["vindolanda","RIB 3341","Ara Vitirum","V","pl","ii","un"],
+ ["vindolanda","RIB 3342","Dibus Vitiri(b)us","V","pl","ii","m"],
+ ["vindolanda","RIB 3343","Deo V(…)","V","un","un","m"],
+ ["vindolanda","Britannia 41, p. 447","Deo Hueteribus","H","pl","ee","m"],
+ ["chesterlestreet","RIB 1046","Deo Vitiri","V","sg","ii","m"],
+ ["chesterlestreet","RIB 1047","Deabus Vitiribus","V","pl","ii","f"],
+ ["chesterlestreet","RIB 1048","Deabus Vit(iri)bus","V","pl","ii","f"],
+ ["chesters","RIB 1455","Deo Sancto Vitiri","V","sg","ii","m"],
+ ["chesters","RIB 1456","Dibus Veteribus","V","pl","ee","m"],
+ ["chesters","RIB 1457","Dibus Vitirbus","V","pl","ii","m"],
+ ["chesters","RIB 1458","D(eo) Votri(?)","V","sg","oth","m"],
+ ["corbridge","RIB 1139","Deo Veteri","V","sg","ee","m"],
+ ["corbridge","RIB 1140","Deo Vitiri","V","sg","ii","m"],
+ ["corbridge","RIB 1141","Vit(…)","V","un","un","un"],
+ ["ebchester","RIB 1103","Deo Vitiri Maximus","V","sg","ii","m"],
+ ["ebchester","RIB 1104","Deo Vitiri","V","sg","ii","m"],
+ ["greatchesters","RIB 1728","Deo Vetiri","V","sg","ei","m"],
+ ["greatchesters","RIB 1729","Dib[us] Veteribus","V","pl","ee","m"],
+ ["greatchesters","RIB 1730","Dibus Veteribus","V","pl","ee","m"],
+ ["housesteads","RIB 1602","Deo Hueteri","H","sg","ee","m"],
+ ["housesteads","RIB 1603","Deo Huitri","H","sg","oth","m"],
+ ["housesteads","RIB 1604","Deo Veteribus","V","pl","ee","m"],
+ ["housesteads","RIB 1605","[Dib]us Vete[ri]bus","V","pl","ee","m"],
+ ["housesteads","RIB 1606","Veteribus","V","pl","ee","un"],
+ ["housesteads","RIB 1607","Dibus V[eteribus]","V","pl","ee","m"],
+ ["housesteads","RIB 2068","Deo Veteri","V","sg","ee","m"],
+ ["lanchester","RIB 1087","Deo Vit(iri)","V","sg","ii","m"],
+ ["lanchester","RIB 1088","Vitir[i]","V","sg","ii","un"],
+ ["netherby","RIB 971","Mogonti Vitire","V","sg","ii","m"],
+ ["netherby","RIB 973","Deo Huetiri","H","sg","ei","m"],
+ ["oldpenrith","RIB 925","Vicri[b]us","V","pl","oth","un"],
+ ["piercebridge","RIB 3254","DIIo VIIteri","V","sg","ee","m"],
+ ["thistleton","RIB 2431.3","Veteri","V","sg","ee","un"],
+ ["southshields","RIB 3268","Ansu Vitiri","V","sg","ii","m"],
+ ["york","RIB 660","Deo Veteri","V","sg","ee","m"]
+].map(function(r,i){return {id:i,site:r[0],rib:r[1],text:r[2],init:r[3],num:r[4],vow:r[5],gen:r[6]};});
 
 var MODES = {
   init:{label:"Initial spelling",cats:{V:{l:"V-  (Veteri, Vitiri…)",c:"var(--c-v)"},VH:{l:"VH-  (Vheteri)",c:"var(--c-vh)"},H:{l:"H-  (Huitiri, Hueteri…)",c:"var(--c-h)"}}},
-  num: {label:"Number",cats:{sg:{l:"Singular",c:"var(--c-sg)"},pl:{l:"Plural",c:"var(--c-pl)"},un:{l:"Not determinable",c:"var(--c-un)"}}}
+  num: {label:"Number",cats:{sg:{l:"Singular",c:"var(--c-sg)"},pl:{l:"Plural",c:"var(--c-pl)"},un:{l:"Not determinable",c:"var(--c-un)"}}},
+  vow: {label:"Stem vowels",cats:{ee:{l:"e–e  (Veter-)",c:"var(--c-ee)"},ei:{l:"e–i  (Vetir-)",c:"var(--c-ei)"},ii:{l:"i–i  (Vitir-)",c:"var(--c-ii)"},ie:{l:"i–e  (Viter-)",c:"var(--c-ie)"},oth:{l:"Other / corrupt  (Vetri, Votri, Vicri…)",c:"var(--c-oth)"},un:{l:"Not determinable",c:"var(--c-un)"}}},
+  gen: {label:"Gender of the formula",cats:{m:{l:"Masculine  (deo / dibus)",c:"var(--c-m)"},f:{l:"Feminine  (deabus)",c:"var(--c-f)"},un:{l:"No deus / dea",c:"var(--c-un)"}}}
 };
 var CSS = getComputedStyle(document.documentElement);
 function col(v){ return CSS.getPropertyValue(v.slice(4,-1)).trim(); }
@@ -355,11 +405,9 @@ INSC.forEach(function(r){
   var m = L.circleMarker([s.lat,s.lon],{radius:8,weight:2,color:"#fff",fillOpacity:.92});
   m.rec = r;
   m.bindPopup(function(){
-    var mi=MODES.init.cats[r.init], mn=MODES.num.cats[r.num];
+    var tags=["init","vow","num","gen"].map(function(k){var c=MODES[k].cats[r[k]];return '<span style="--dot:'+c.c+'">'+c.l.split("  ")[0]+'</span>';}).join("");
     return '<div class="pp"><div class="site">'+s.name+'</div><div class="rib">'+r.rib+'</div>'+
-           '<div class="read">'+r.text+'</div><div class="tags">'+
-           '<span style="--dot:'+mi.c+'">'+mi.l.split("  ")[0]+'</span>'+
-           '<span style="--dot:'+mn.c+'">'+mn.l+'</span></div></div>';
+           '<div class="read">'+r.text+'</div><div class="tags">'+tags+'</div></div>';
   },{maxWidth:320});
   m.bindTooltip(r.rib+" · "+r.text,{direction:"top",offset:[0,-8]});
   markers[r.id]=m;
@@ -489,3 +537,4 @@ fitView();
 </script>
 </body>
 </html>
+
